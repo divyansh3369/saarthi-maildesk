@@ -359,7 +359,7 @@ function App() {
       };
 
       const response = await fetch(
-        `http://localhost:5000/api/${endpoint}`,
+       `https://saarthi-maildesk-api.onrender.com/api/${endpoint}`
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
