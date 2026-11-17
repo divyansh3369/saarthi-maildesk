@@ -10,6 +10,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const MODEL = process.env.GEMINI_MODEL || "gemini-3.8-flash";
 
+
 const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:5174",
@@ -30,6 +31,7 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
+
 
 app.use(express.json({ limit: "1mb" }));
 
