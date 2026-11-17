@@ -339,6 +339,7 @@ function App() {
     toast("Draft saved locally");
   }
 
+  
   async function callAI(kind) {
     if (!selectedEmail || aiLoading) return;
 
@@ -359,10 +360,12 @@ function App() {
       };
 
       const response = await fetch(
-       `https://saarthi-maildesk-api.onrender.com/api/${endpoint}`
+        `https://saarthi-maildesk-api.onrender.com/api/${endpoint}`,
         {
           method: "POST",
-          headers: { "Content-Type": "application/json" },
+          headers: {
+            "Content-Type": "application/json",
+          },
           body: JSON.stringify(payload),
         }
       );
@@ -382,7 +385,10 @@ function App() {
           throw new Error("AI returned an empty summary.");
         }
 
-        updateEmail(selectedEmail.id, { summary: data.summary });
+        updateEmail(selectedEmail.id, {
+          summary: data.summary,
+        });
+
         toast("AI summary updated");
       } else {
         if (!data.reply) {
@@ -390,19 +396,23 @@ function App() {
         }
 
         setDraft(data.reply);
-        updateEmail(selectedEmail.id, { draft: data.reply });
+        updateEmail(selectedEmail.id, {
+          draft: data.reply,
+        });
         setEditing(true);
+
         toast("AI reply generated — review it before use");
       }
     } catch (error) {
       setAiError(
         error.message ||
-        "Could not connect to the AI service. Check that the backend is running."
+        "Could not connect to the AI service. Please try again."
       );
     } finally {
       setAiLoading("");
     }
   }
+
 
   function createDemoEmail(event) {
     event.preventDefault();
